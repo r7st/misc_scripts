@@ -20,12 +20,10 @@ BEGIN{
   gsub(/<[^>]*>/,"",$0); sub(/CANTO /,"",$0); LN=1
   Line="[Canto "$0"]"; printf("\n\n%25s\n\n",Line)
 }
-/<\/p>/{ InCanto = "false";}
-{ 
-  if (InCanto == "true") {
-    gsub(/<br>/,"",$0); gsub(/<br\/>/,"",$0)
-    if ($0 !~ /^$/) { printf("%3d| ",LN++) }
-    print
-  }
+/<\/p>/{ InCanto="false" }
+(InCanto=="true"){
+  gsub(/<br\/?>/,"",$0)
+  if ($0 !~ /^$/) { printf("%3d| ",LN++) }
+  print
 }
-/<p>/{ InCanto = "true"; printf("\n") }
+/<p>/{ InCanto="true"; printf("\n") }
