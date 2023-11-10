@@ -9,8 +9,9 @@ function Show(Arg){
       -exec basename {} \\; | sort", ENV["HOME"])
     i=0; while (cmd|getline) Files[i++]=$0; close(cmd)
     for (i in Files){ j=0; print "\nContents of: "Files[i]
-      while((getline<(ENV["HOME"]"/"Files[i]))>0) 
-        printf("%3d: %s\n",j++,$0); close(Files[i])
+      InputFile=ENV["HOME"]"/"Files[i]
+      while((getline<InputFile)>0)
+        printf("%3d: %s\n",j++,$0); close(InputFile)
     }
   } else { return }; exit
 }
