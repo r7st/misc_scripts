@@ -41,7 +41,7 @@ function GenerateConfigs(){
   print ""
   for (i=1;i<=NUMPEERS;i++){
     print ""
-    split(PeerConfig[i],P,",")
+    split(PeerConfig[i],P,"#")
     GenPeerConfig(i,P[1],P[2],P[3],P[4])
   }
 }
@@ -51,7 +51,7 @@ function Interface(SKey, Port){
   print "############################"
   print "[Interface]"
   print "Address = "GATEWAY
-  print "PrivateKey = "Key
+  print "PrivateKey = "SKey
   print "ListenPort = "Port
 }
 function Peer(PeerNum,PeerAIP,PPub,PPsk){
@@ -69,13 +69,13 @@ function GenPeerConfig(PNum,PKey,PPsk,PeerAIP,SPub){
   print "Address = "PeerAIP
   print "PrivateKey = "PKey
   print "ListenPort = "LISTEN_PORT
+  if (length(DNS)>0) print "DNS = "DNS
   print ""
   print "[Peer]"
   print "PublicKey = "SPub
   print "PreSharedKey = "PPsk
   print "AllowedIPs = 0.0.0.0/0"
   print "EndPoint = "ENDPOINT":"LISTEN_PORT
-  if (length(DNS)>0) print "DNS = "DNS
   print "#########################"
   print "### END Peer "PNum" config ###"
   print "#########################"
@@ -86,7 +86,7 @@ function GenPeers(NumPeers,SPub){
     split(GATEWAY,O,"."); PeerAIP=sprintf("%d.%d.%d.%d/32",\
       O[1],O[2],O[3],O[4]+i)
     Peer(i,PeerAIP,PPub,PPsk)
-    PeerConfig[i]=sprintf("%s,%s,%s,%s",PKey,PPsk,PeerAIP,SPub)
+    PeerConfig[i]=sprintf("%s#%s#%s#%s",PKey,PPsk,PeerAIP,SPub)
   }
   print "############################"
   print "### END Interface Config ###"
