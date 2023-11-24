@@ -53,6 +53,7 @@ function Interface(SKey){
   print "Address = "GATEWAY
   print "PrivateKey = "SKey
   print "ListenPort = "LISTEN_PORT
+  print "Table = off"
 }
 function Peer(PeerNum,PeerAIP,PPub,PPsk){
   print ""
@@ -70,6 +71,7 @@ function GenPeerConfig(PNum,PKey,PPsk,PeerAIP,SPub){
   print "PrivateKey = "PKey
   print "ListenPort = "LISTEN_PORT
   if (length(DNS)>0) print "DNS = "DNS
+  print "Table = off"
   print ""
   print "[Peer]"
   print "PublicKey = "SPub
