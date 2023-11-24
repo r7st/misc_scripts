@@ -36,7 +36,7 @@ function GenPsk(){
 ### BGN Server/Peer Config ###
 function GenerateConfigs(){
   SKey=GenKey(); SPub=PubKey(SKey)
-  Interface(SKey,51820)
+  Interface(SKey)
   GenPeers(NUMPEERS,SPub)
   print ""
   for (i=1;i<=NUMPEERS;i++){
@@ -45,14 +45,14 @@ function GenerateConfigs(){
     GenPeerConfig(i,P[1],P[2],P[3],P[4])
   }
 }
-function Interface(SKey, Port){
+function Interface(SKey){
   print "############################"
   print "### BGN Interface Config ###"
   print "############################"
   print "[Interface]"
   print "Address = "GATEWAY
   print "PrivateKey = "SKey
-  print "ListenPort = "Port
+  print "ListenPort = "LISTEN_PORT
 }
 function Peer(PeerNum,PeerAIP,PPub,PPsk){
   print ""
