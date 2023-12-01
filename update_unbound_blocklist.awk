@@ -14,7 +14,7 @@ function Search(){
   i=1; while (cmd|getline) Buf[i++]=$0; close(cmd)
 }
 /^s */{ SString=$0; Search() }
-/^c/{ split("",Buf) }
+/^c/{ Clear() }
 /^p/{ for (i=1;i<=length(Buf);i++) { print Buf[i]} }
 /^u/{
   for (i=1;i<=length(Buf);i++){
