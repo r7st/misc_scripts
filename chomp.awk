@@ -1,4 +1,4 @@
-#!/usr/bin/env awk -f
+#!/usr/bin/awk -f
 # safely remove empty lines and comments from
 # configuration files. CM is Comment Marker
 
