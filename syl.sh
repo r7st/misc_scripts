@@ -10,10 +10,8 @@ OFILE=`mktemp`
 curl -s https://web.archive.org/web/20160822211027/http://semarch.linguistics.fas.nyu.edu/barker/Syllables/index.txt | awk '\
 BEGIN{ In="false" }
 /^=/{ In="true" }
-( In=="false" ){ next }
+(In=="false"){ next }
 /.*[A-Z]+$/{
-  sub(/[A-Z]+.*/,"")
-  gsub(/[ \t]*/,"")
   gsub(/[^a-z]/,"")
   print
 }' > $OFILE
