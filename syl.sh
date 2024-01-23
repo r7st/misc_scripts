@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 # generate fantasy names from english syllables
 # prints pronunciation, spelling up for interpretation
 # run such as "./syl.sh 10" to generate 10 names
