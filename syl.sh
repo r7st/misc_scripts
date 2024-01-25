@@ -8,15 +8,17 @@ set -eo pipefail
 trap '[ -f $OFILE ] && rm $OFILE; exit' SIGINT SIGTERM
 DefaultBatch=20
 
-OFILE=`mktemp`
-curl -s https://web.archive.org/web/20160822211027/http://semarch.linguistics.fas.nyu.edu/barker/Syllables/index.txt | awk '\
-BEGIN{ In="false" }
-/^=/{ In="true" }
-(In=="false"){ next }
-/.*[A-Z]+$/{
-  gsub(/[^a-z]/,"")
-  print
-}' > $OFILE
+Populate(){
+  OFILE=`mktemp`
+  curl -s https://web.archive.org/web/20160822211027/http://semarch.linguistics.fas.nyu.edu/barker/Syllables/index.txt | awk '\
+  BEGIN{ In="false" }
+  /^=/{ In="true" }
+  (In=="false"){ next }
+  /.*[A-Z]+$/{
+    gsub(/[^a-z]/,"")
+    print
+  }' > $OFILE
+}
 
 CreateName(){
   for i in `seq 1 $((RANDOM%3+1))`; do
@@ -66,4 +68,6 @@ done
 [ -z $Count ] && Usage
 [ -z $BatchNum ] && BatchNum=$DefaultBatch
 
+Populate
 GenerateNames
+[ -f $OFILE ] && rm $OFILE
