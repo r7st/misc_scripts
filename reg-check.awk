@@ -7,7 +7,7 @@ BEGIN{ printf "Starting reg-check...\n> "; INP="" }
 }
 /^try +\/[^\/]+\// && (INP!=""){
   sub("^try[ \t]*","")
-  cmd="sed -rn \'"$0"p\' <<< "INP
+  cmd="sed -rn \'"$0"p\' <<< ""\""INP"\""
   while (cmd | getline){ print }
   printf("> "); next
 }
